@@ -13,12 +13,12 @@ from flask import (
     render_template,
     request,
     send_from_directory,
-    url_for,
-    session as fsession
 )
-from flask_session import Session
-
+from flask import session as fsession
+from flask import url_for
 from werkzeug.utils import secure_filename
+
+from flask_session import Session
 
 from . import data
 from .tools import download_data
@@ -74,9 +74,7 @@ def upload_file():
                     Path(__file__).parent.parent / "uploads/data.xlsx"
                 )
             else:
-                df_data = pd.read_csv(
-                    Path(__file__).parent.parent / "uploads/data.csv"
-                )
+                df_data = pd.read_csv(Path(__file__).parent.parent / "uploads/data.csv")
 
             model = joblib.load(Path(__file__).parent / "model.pkl")
             vectorizer = joblib.load(Path(__file__).parent / "vectorizer.pkl")
@@ -103,6 +101,4 @@ def upload(filename):
 @app.route("/download_data", methods=("POST", "GET"))
 def predicted_data():
     s_data = fsession.get("data")
-    return download_data(
-        dataframe=s_data, attachment_filename="predicted_data.xlsx"
-    )
+    return download_data(dataframe=s_data, attachment_filename="predicted_data.xlsx")
