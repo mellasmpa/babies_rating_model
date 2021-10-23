@@ -50,7 +50,7 @@ def too_large(e):
     return "File is too large", 413
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 def index():
     files = os.listdir(app.config["UPLOAD_PATH"])
     return render_template("view.html", files=files)
