@@ -15,7 +15,6 @@ from flask import (
     send_from_directory,
 )
 from flask import session as fsession
-from flask import url_for
 from werkzeug.utils import secure_filename
 
 from flask_session import Session
@@ -51,7 +50,7 @@ def too_large(e):
     return "File is too large", 413
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
     files = os.listdir(app.config["UPLOAD_PATH"])
     return render_template("view.html", files=files)
