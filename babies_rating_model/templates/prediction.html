@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-session">
+        <div>
+            <hr>
+            <div class="col-sm-4">
+                <a style="font-size: 1.3rem;" href="{{ url_for('predicted_data') }}">Download Data In Excel</a>
+            </div>
+            <table class="table table-striped table-bordered table-hover table-condensed table-responsive nowrap">
+                <thead>
+                    <tr>
+                        {% for col in df_data.columns %}
+                            <th>{{col}}</th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                {% for row in df_data.values %}
+                    <tr>
+                        {% for cell in row %}
+                            <td style="white-space: nowrap">{{ cell }}</td>
+                        {%  endfor %}
+                    </tr>
+                {%  endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

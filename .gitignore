@@ -5,6 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
+*.idea
+*.ipynb
+flask_session
 
 # Distribution / packaging
 .Python
