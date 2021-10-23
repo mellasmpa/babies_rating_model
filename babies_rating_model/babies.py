@@ -72,11 +72,11 @@ def upload_file():
             if filename.endswith("xlsx"):
                 df_data = pd.read_excel(
                     Path(__file__).parent.parent / "uploads/data.xlsx"
-                ).head(1000)
+                )
             else:
                 df_data = pd.read_csv(
                     Path(__file__).parent.parent / "uploads/data.csv"
-                ).head(1000)
+                )
 
             model = joblib.load(Path(__file__).parent / "model.pkl")
             vectorizer = joblib.load(Path(__file__).parent / "vectorizer.pkl")
@@ -91,7 +91,7 @@ def upload_file():
                 {1.0: str(1), 0.0: str(0)}
             )
             fsession["data"] = df_data
-            return render_template("prediction.html", df_data=df_data.head(100))
+            return render_template("prediction.html", df_data=df_data.head(30))
     return "", 204
 
 
